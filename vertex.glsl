@@ -19,12 +19,20 @@ layout(location = 4) out vec3 norm;
 layout(location = 5) out vec3 ldir;
 layout(location = 6) out vec2 texcoord;
 
+struct ImageUniform {
+	vec4 color;
+};
+
+layout(std430, binding = 10) buffer ImageBlock {
+	ImageUniform imageUniform[];
+};
+
 void main()
 {
 	gl_Position = matrix.mvpmat * attr_vertex;
 	vpos = (matrix.mvmat * attr_vertex).xyz;
 	norm = mat3(matrix.mvmat) * attr_normal;
-
+	norm.r += imageUniform[0].color.r;
 	texcoord = attr_texcoord * vec2(2.0, 1.0);
 
 	ldir = matrix.light_pos - vpos;
