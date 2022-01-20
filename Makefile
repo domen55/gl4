@@ -11,9 +11,11 @@ $(bin): $(obj) spirv/vertex.spv spirv/pixel.spv
 	$(CC) -o $@ $(obj) $(LDFLAGS)
 
 spirv/vertex.spv: vertex.glsl
+	mkdir -p spirv
 	$(GLSLANG) -V -S vert -o $@ $<
 
 spirv/pixel.spv: pixel.glsl
+	mkdir -p spirv
 	$(GLSLANG) -V -S frag -o $@ $<
 
 .PHONY: clean
