@@ -1,4 +1,4 @@
-#version 420
+#version 460
 #extension GL_ARB_separate_shader_objects : enable
 
 layout(std140, binding = 0) uniform matrix_state {
